@@ -11,9 +11,15 @@ import { AdministrationComponent } from './components/administration/administrat
 import { CheckFooterComponent } from './components/check-footer/check-footer.component';
 import { CheckHeaderComponent } from './components/check-header/check-header.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { PrefixIfValueNotEmptyPipe } from './pipes/prefix-if-value-not-empty.pipe';
+import { AddDelimiterPipe } from './pipes/add-delimiter.pipe';
 
 
 export const routeConfig: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
     component: SearchProfilesComponent
@@ -37,13 +43,19 @@ export const routeConfig: Routes = [
     AdministrationComponent,
     CheckFooterComponent,
     CheckHeaderComponent,
-    NavigationComponent
+    NavigationComponent,
+    PrefixIfValueNotEmptyPipe,
+    AddDelimiterPipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     RouterModule.forRoot(routeConfig),
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent],

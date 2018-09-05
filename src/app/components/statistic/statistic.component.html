@@ -1,3 +1,62 @@
-<p>
-  statistic works!
-</p>
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+
+  <ng-container matColumnDef="userName">
+    <mat-header-cell *matHeaderCellDef>Имя пользователя</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{request.userName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="login">
+    <mat-header-cell *matHeaderCellDef>Логин SC-CHECK</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{request.login}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ip">
+    <mat-header-cell *matHeaderCellDef>IP Пользователя</mat-header-cell>
+    <mat-cell class="description-cell"
+              *matCellDef="let request">{{request.ip}}</mat-cell>
+
+  </ng-container>
+  <ng-container matColumnDef="searchType">
+    <mat-header-cell *matHeaderCellDef>Тип поиска</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{request.searchType}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="parameters">
+    <mat-header-cell *matHeaderCellDef fxFlex="400px">Критерии поиска</mat-header-cell>
+    <mat-cell *matCellDef="let request" fxFlex="400px">
+      {{
+      [request.firstName | prefixIfValueNotEmpty: "Имя: ",
+      request.lastName | prefixIfValueNotEmpty: "Наименование: ",
+      request.searchMaxResultsNumber | prefixIfValueNotEmpty: "Лимит результатов: ",
+      request.categories | prefixIfValueNotEmpty: "Категория: ",
+      request.countries | prefixIfValueNotEmpty: "Страна: ",
+      request.passportNumber | prefixIfValueNotEmpty: "Номер документа: ",
+      request.passportCountry | prefixIfValueNotEmpty: "Страна документа: ",
+      request.text | prefixIfValueNotEmpty: "Текст: ",
+      request.birthDay | prefixIfValueNotEmpty: "Дата рождения: "
+
+      ] | addDelimiter:"; " }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="searchResultsNumber">
+    <mat-header-cell *matHeaderCellDef>Найдено профилей</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{request.searchResultsNumber}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="searchDuration">
+    <mat-header-cell *matHeaderCellDef>Время поиска (мс)</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{request.searchDuration}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="searchDate">
+    <mat-header-cell *matHeaderCellDef>Дата поиска</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{request.searchDate}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="profiles">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let request"></mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>

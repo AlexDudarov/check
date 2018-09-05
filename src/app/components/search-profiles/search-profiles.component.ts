@@ -1,26 +1,26 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Profile} from '../../entity/profile';
+import {CompactProfile} from '../../entity/compact-profile';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 
 
-const profiles: Profile[] = [
-  new Profile('AAA', 'VIP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('AAA', 'VIP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('AAA', 'VIP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('AAA', 'VIP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
-  new Profile('BBB', 'PEP'),
+const profiles: CompactProfile[] = [
+  new CompactProfile('AAA', 'VIP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('AAA', 'VIP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('AAA', 'VIP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('AAA', 'VIP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
+  new CompactProfile('BBB', 'PEP'),
 ];
 
 @Component({
@@ -30,11 +30,11 @@ const profiles: Profile[] = [
 })
 export class SearchProfilesComponent implements OnInit {
 
-  profiles: Profile[];
+  profiles: CompactProfile[];
   displayedColumns: string[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource:  MatTableDataSource<Profile>;
+  dataSource:  MatTableDataSource<CompactProfile>;
 
   constructor() {
   }
@@ -42,12 +42,12 @@ export class SearchProfilesComponent implements OnInit {
   ngOnInit() {
     this.profiles = this.getProfiles();
     this.displayedColumns = this.getDisplayedColumns();
-    this.dataSource = new MatTableDataSource<Profile>(this.getProfiles());
+    this.dataSource = new MatTableDataSource<CompactProfile>(this.getProfiles());
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  getProfiles(): Profile[] {
+  getProfiles(): CompactProfile[] {
     console.log(profiles);
     return profiles;
 
@@ -56,6 +56,11 @@ export class SearchProfilesComponent implements OnInit {
   getDisplayedColumns(): string[] {
     return ['name', 'categories'];
   }
+
+  onRowClicked(row) {
+    console.log('Row clicked: ', row);
+  }
+
 
 
 }
