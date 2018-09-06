@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StatisticService} from '../../services/statistic.service';
+import {RequestInfoFilter} from '../../filters/request-info-filter';
 
 @Component({
   selector: 'app-statistic',
@@ -19,7 +20,7 @@ export class StatisticComponent implements OnInit {
   }
 
   getRequestInfos(): void {
-    this.dataSource = this.statisticService.getRequestInfos().subscribe(requestInfos => this.dataSource = requestInfos);
+    this.dataSource = this.statisticService.getRequestInfos(new RequestInfoFilter(1)).subscribe(requestInfos => this.dataSource = requestInfos);
   }
 
 }

@@ -5,13 +5,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AddDelimiterPipe implements PipeTransform {
 
-  transform(value: string[], delimiter: string): string {
-   let result = '';
-    value.forEach(function (part, index, array) {
-      if (!(!value || /^\s*$/.test(part))) {
-        result = result + part + delimiter;
+  transform(array: string[], delimiter: string): string {
+    let result = '';
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] && !(/^\s*$/.test(array[i]))) {
+        if (result) {
+          result += delimiter;
+        }
+        result += array[i];
       }
-    });
+    }
     return result;
   }
 
