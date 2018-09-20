@@ -13,7 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
       ),
       new RequestInfo(2, 'AAA', 'aaa', '123123', 123, '22.09.2017',
         2, 'Четкий', 100, 2,
-        'TERRORIST', '', 'Пупкин', '12.05.1990', 'BELARUS',
+        'TERRORIST', '', 'Попкин', '12.05.1990', 'BELARUS',
         'MR123956', 'BELARUS', 'LONDON is a capital of greatBritan',
         [{name: 'Вася Пупкин', categories: 'Terrorizm'}],
       ),

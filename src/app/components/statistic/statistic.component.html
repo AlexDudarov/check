@@ -1,4 +1,14 @@
-<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+matSort matSortActive="searchDate"  matSortDirection="desc" >
 
   <ng-container matColumnDef="userName">
     <mat-header-cell *matHeaderCellDef>Имя пользователя</mat-header-cell>
@@ -45,7 +55,7 @@
     <mat-cell *matCellDef="let request">{{request.searchDuration}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="searchDate">
-    <mat-header-cell *matHeaderCellDef>Дата поиска</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Дата поиска</mat-header-cell>
     <mat-cell *matCellDef="let request">{{request.searchDate}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="profiles">
@@ -57,6 +67,8 @@
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"> </mat-row>
 
 </mat-table>
+<mat-paginator [length]="100" [pageSize]="10"
+               [pageSizeOptions]="[3, 5, 10]"></mat-paginator>

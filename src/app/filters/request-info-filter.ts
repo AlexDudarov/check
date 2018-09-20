@@ -7,4 +7,5 @@ export class RequestInfoFilter {
   }
 
   page: number;
+  pageSize: number;
 }

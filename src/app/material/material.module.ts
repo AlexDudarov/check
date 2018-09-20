@@ -5,7 +5,13 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule,
+  MatMenuModule, MatProgressSpinnerModule
+
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -17,7 +23,13 @@ const modules = [
   MatPaginatorModule,
   MatSortModule,
   MatSidenavModule,
-  FlexLayoutModule
+  FlexLayoutModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule,
+  MatMenuModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

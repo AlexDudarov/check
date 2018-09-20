@@ -1,14 +1,25 @@
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-  <div class="container">
-    <a class="navbar-brand">Angular Router</a>
-    <ul class="nav navbar-nav" routerLinkActive="active">
-      <li class="nav-item"><a class="nav-link" routerLink="home">Поиск</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="about">Проверка документа</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="courses">Поиск по фрагменту</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="statistic">Статистика</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="courses">Администрирование</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="courses">Свои списки</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="courses">Белый список</a></li>
-    </ul>
-  </div>
-</nav>
+<!--<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">-->
+  <!--<div class="container">-->
+    <!--<a class="navbar-brand">Angular Router</a>-->
+    <!--<ul class="nav navbar-nav" routerLinkActive="active">-->
+      <!--<li class="nav-item"><a class="nav-link" routerLink="home">Поиск</a></li>-->
+      <!--<li class="nav-item"><a class="nav-link" routerLink="about">Проверка документа</a></li>-->
+      <!--<li class="nav-item"><a class="nav-link" routerLink="courses">Поиск по фрагменту</a></li>-->
+      <!--<li class="nav-item"><a class="nav-link" routerLink="statistic">Статистика</a></li>-->
+      <!--<li class="nav-item"><a class="nav-link" routerLink="courses">Администрирование</a></li>-->
+      <!--<li class="nav-item"><a class="nav-link" routerLink="courses">Свои списки</a></li>-->
+      <!--<li class="nav-item"><a class="nav-link" routerLink="courses">Белый список</a></li>-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--</nav>-->
+
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item><a class="nav-link" routerLink="home">Поиск</a></button>
+  <button mat-menu-item><a class="nav-link" routerLink="about">Проверка документа</a></button>
+  <button mat-menu-item><a class="nav-link" routerLink="courses">Поиск по фрагменту</a></button>
+  <button mat-menu-item><a class="nav-link" routerLink="statistic">Статистика</a></button>
+  <button mat-menu-item><a class="nav-link" routerLink="courses">Администрирование</a></button>
+  <button mat-menu-item><a class="nav-link" routerLink="courses">Свои списки</a></button>
+  <button mat-menu-item><a class="nav-link" routerLink="courses">Белый список</a></button>
+</mat-menu>

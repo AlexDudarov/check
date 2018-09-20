@@ -1,26 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {StatisticService} from '../../services/statistic.service';
-import {RequestInfoFilter} from '../../filters/request-info-filter';
+import {RequestInfoDataSource} from '../../entity/request-info-data-source';
+import {MatPaginator, MatSort} from '@angular/material';
+import {tap} from 'rxjs/operators';
+import {merge} from 'rxjs';
 
 @Component({
   selector: 'app-statistic',
   templateUrl: './statistic.component.html',
   styleUrls: ['./statistic.component.css']
 })
-export class StatisticComponent implements OnInit {
+export class StatisticComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['userName', 'login', 'ip', 'searchType', 'parameters', 'searchResultsNumber', 'searchDuration',
-    'searchDate', 'profiles' ];
-  dataSource;
-  constructor(private statisticService: StatisticService) { }
+    'searchDate', 'profiles'];
+  dataSource: RequestInfoDataSource;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
+  constructor(private statisticService: StatisticService) {
+  }
+
+  ngAfterViewInit() {
+
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        tap(() => this.loadRequestInfosPage())
+      )
+      .subscribe();
+  }
+
+  loadRequestInfosPage() {
+    console.log(this.sort.active);
+    this.dataSource.loadRequests();
+  }
 
   ngOnInit() {
-    this.getRequestInfos();
+    this.dataSource = new RequestInfoDataSource(this.statisticService);
+    this.dataSource.loadRequests();
   }
 
-  getRequestInfos(): void {
-    this.dataSource = this.statisticService.getRequestInfos(new RequestInfoFilter(1)).subscribe(requestInfos => this.dataSource = requestInfos);
+  onRowClicked(row) {
+    console.log('Row clicked: ', row);
   }
+
 
 }
