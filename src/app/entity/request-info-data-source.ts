@@ -3,6 +3,7 @@ import {RequestInfo} from './request-info';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {StatisticService} from '../services/statistic.service';
 import {catchError, finalize} from 'rxjs/operators';
+import {RequestInfoFilter} from '../filters/request-info-filter';
 
 export class RequestInfoDataSource implements DataSource<RequestInfo> {
 
@@ -22,11 +23,11 @@ export class RequestInfoDataSource implements DataSource<RequestInfo> {
     this.loadingRequests.complete();
   }
 
-  loadRequests() {
+  loadRequests(filter: RequestInfoFilter) {
     this.loadingRequests.next(true);
-    this.statisticService.getRequestInfos(null)
+    this.statisticService.getRequestInfos(filter)
       .pipe(
-        catchError(() => of<RequestInfo[]>()),
+        // catchError(() => of<RequestInfo[]>()),
         finalize(() => this.loadingRequests.next(false))
       )
       .subscribe(requests => this.requestsSubject.next(requests));

@@ -4,6 +4,7 @@ import {RequestInfoDataSource} from '../../entity/request-info-data-source';
 import {MatPaginator, MatSort} from '@angular/material';
 import {tap} from 'rxjs/operators';
 import {merge} from 'rxjs';
+import {RequestInfoFilter} from '../../filters/request-info-filter';
 
 @Component({
   selector: 'app-statistic',
@@ -15,9 +16,9 @@ export class StatisticComponent implements OnInit, AfterViewInit {
   displayedColumns = ['userName', 'login', 'ip', 'searchType', 'parameters', 'searchResultsNumber', 'searchDuration',
     'searchDate', 'profiles'];
   dataSource: RequestInfoDataSource;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  filter: RequestInfoFilter;
 
 
   constructor(private statisticService: StatisticService) {
@@ -36,12 +37,13 @@ export class StatisticComponent implements OnInit, AfterViewInit {
 
   loadRequestInfosPage() {
     console.log(this.sort.active);
-    this.dataSource.loadRequests();
+    this.dataSource.loadRequests(this.filter);
   }
 
   ngOnInit() {
     this.dataSource = new RequestInfoDataSource(this.statisticService);
-    this.dataSource.loadRequests();
+    this.filter = new RequestInfoFilter();
+    this.dataSource.loadRequests(this.filter);
   }
 
   onRowClicked(row) {
