@@ -1,5 +1,5 @@
 <mat-form-field>
-  <input matInput [matDatepicker]="picker"  placeholder="Choose a date"  [(ngModel)]="filter.requestTimeFrom" name="name">
+  <input matInput [matDatepicker]="picker" placeholder="Выберите дату" [(ngModel)]="filter.requestTimeFrom" name="name">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
@@ -8,7 +8,7 @@
   <mat-spinner></mat-spinner>
 </div>
 <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
-matSort matSortActive="searchDate"  matSortDirection="desc" >
+           matSort matSortActive="searchDate" matSortDirection="desc">
 
   <ng-container matColumnDef="userName">
     <mat-header-cell *matHeaderCellDef>Имя пользователя</mat-header-cell>
@@ -22,7 +22,8 @@ matSort matSortActive="searchDate"  matSortDirection="desc" >
   <ng-container matColumnDef="ip">
     <mat-header-cell *matHeaderCellDef>IP Пользователя</mat-header-cell>
     <mat-cell class="description-cell"
-              *matCellDef="let request">{{request.ip}}</mat-cell>
+              *matCellDef="let request">{{request.ip}}
+    </mat-cell>
 
   </ng-container>
   <ng-container matColumnDef="searchType">
@@ -60,15 +61,16 @@ matSort matSortActive="searchDate"  matSortDirection="desc" >
   </ng-container>
   <ng-container matColumnDef="profiles">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let request"></mat-cell>
+    <mat-cell *matCellDef="let request">
+      <i *ngIf="request.searchResultsNumber != 0" class="material-icons" (click)="openDialog(request)">
+        info
+      </i>
+    </mat-cell>
   </ng-container>
 
-
-
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-
-  <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"> </mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
 
 </mat-table>
-<mat-paginator [length]="100" [pageSize]="10"
-               [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+<mat-paginator [length]="totalCount" [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 20]"></mat-paginator>

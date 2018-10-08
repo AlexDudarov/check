@@ -1,3 +1,10 @@
 .my {
   width: 200px;
 }
+i:hover{
+  cursor: pointer;
+}
+
+.mat-row:hover {
+  background-color: #8ec8c3;
+}

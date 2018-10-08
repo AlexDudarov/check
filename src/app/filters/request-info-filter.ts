@@ -25,7 +25,7 @@ export class RequestInfoFilter {
   passport: string;
 
   first: number;
-  oageSize: number;
+  pageSize: number;
   sortField: string;
   sortOrder: string;
 }

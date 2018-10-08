@@ -26,9 +26,18 @@ export class StatisticService {
   getRequestInfos(filter: RequestInfoFilter): Observable<RequestInfo[]> {
     return this.http.post<RequestInfo[]>(this.statisticUrl, filter, httpOptions)
       .pipe(
-        tap(requests => this.log('fetched heroes')),
-        catchError(this.handleError('getHeroes', []))
+        tap(requests => this.log('fetched requests')),
+        catchError(this.handleError('getRequests', []))
       );
+  }
+
+  getTotalCount(filter: RequestInfoFilter): Observable<number> {
+    return this.http.post<number>(this.statisticUrl + '/count', filter, httpOptions)
+      .pipe(
+        tap(requests => this.log('fetched requests')),
+        catchError(this.handleError('getRequests', undefined))
+      );
+
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

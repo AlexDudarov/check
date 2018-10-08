@@ -4,7 +4,7 @@ export class CompactProfile {
     this.name = name;
     this.categories = categories;
   }
-
+  id: number;
   name: string;
   categories: string;
 

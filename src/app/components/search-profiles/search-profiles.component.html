@@ -1,17 +1,54 @@
-<a>Profiles</a>
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<mat-card>
+  <mat-card-title>
+    Критерии поиска
+  </mat-card-title>
+  <mat-card-content>
+    <mat-form-field class="padding">
+      <input matInput [(ngModel)]="filter.name" placeholder="Наименование или id">
+    </mat-form-field>
+    <mat-form-field class="padding">
+      <mat-select placeholder="Страна" [(ngModel)]="filter.countries" multiple>
+        <mat-option *ngFor="let country of countries" [value]="country">{{country.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="padding">
+      <mat-select placeholder="Категория" [(ngModel)]="filter.categories" multiple>
+        <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="padding">
+      <input matInput [matDatepicker]="picker" placeholder="Дата рождения" [(ngModel)]="filter.birthDay" name="name">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button  [disabled]="isEmptyName()" (click)="find()">Найти</button>
+    <mat-slider
+      thumbLabel [(ngModel)]="filter.maxResults"
+      tickInterval="1"
+      min="100"
+      max="1000"
+    ></mat-slider>
+    <mat-checkbox [(ngModel)]="filter.fuzzy">Нечеткий поиск</mat-checkbox>
+  </mat-card-actions>
+</mat-card>
+
+<div>
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
   <ng-container matColumnDef="name">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef> Фамилия, имя, отчество (наименование) </th>
-    <td mat-cell *matCellDef="let profile"> {{profile.name}} </td>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Фамилия, имя, отчество (наименование)</th>
+    <td mat-cell *matCellDef="let profile"> {{profile.name}}</td>
   </ng-container>
   <ng-container matColumnDef="categories">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Категории </th>
-    <td mat-cell *matCellDef="let profile"> {{profile.categories}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Категории</th>
+    <td mat-cell *matCellDef="let profile"> {{profile.categories}}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-  (click)="onRowClicked(row)"></tr>
-
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      (click)="onRowClicked(row)"></tr>
+</mat-table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+<div *ngIf="dataSource.data.length === 0">Профили не найдены</div>

@@ -27,7 +27,7 @@ export class RequestInfoDataSource implements DataSource<RequestInfo> {
     this.loadingRequests.next(true);
     this.statisticService.getRequestInfos(filter)
       .pipe(
-        // catchError(() => of<RequestInfo[]>()),
+        catchError(() => of<RequestInfo[]>()),
         finalize(() => this.loadingRequests.next(false))
       )
       .subscribe(requests => this.requestsSubject.next(requests));

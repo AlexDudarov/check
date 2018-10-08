@@ -12,9 +12,11 @@ import {CheckFooterComponent} from './components/check-footer/check-footer.compo
 import {CheckHeaderComponent} from './components/check-header/check-header.component';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PrefixIfValueNotEmptyPipe} from './pipes/prefix-if-value-not-empty.pipe';
 import {AddDelimiterPipe} from './pipes/add-delimiter.pipe';
+import { ProfilesDialogComponent } from './components/profiles-dialog/profiles-dialog.component';
+import {MAT_DATE_LOCALE} from '@angular/material';
 
 
 export const routeConfig: Routes = [
@@ -44,7 +46,8 @@ export const routeConfig: Routes = [
     CheckHeaderComponent,
     NavigationComponent,
     PrefixIfValueNotEmptyPipe,
-    AddDelimiterPipe
+    AddDelimiterPipe,
+    ProfilesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,13 +55,17 @@ export const routeConfig: Routes = [
     MaterialModule,
     RouterModule.forRoot(routeConfig),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'ru-Ru'},
+  ],
   bootstrap: [AppComponent],
+  entryComponents: [ProfilesDialogComponent]
 
 })
 export class AppModule {

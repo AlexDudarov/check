@@ -10,7 +10,15 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatInputModule,
-  MatMenuModule, MatProgressSpinnerModule
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatDialogModule,
+  MatNavList,
+  MatListModule,
+  MatCardModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatCheckboxModule, MatButtonModule
 
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -29,7 +37,14 @@ const modules = [
   MatNativeDateModule,
   MatInputModule,
   MatMenuModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatDialogModule, MatNativeDateModule,
+  MatListModule,
+  MatCardModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatCheckboxModule,
+  MatButtonModule
 ];
 
 @NgModule({
