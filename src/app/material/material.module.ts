@@ -18,7 +18,8 @@ import {
   MatCardModule,
   MatSelectModule,
   MatSliderModule,
-  MatCheckboxModule, MatButtonModule
+  MatCheckboxModule, MatButtonModule,
+  MatExpansionModule
 
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -44,7 +45,9 @@ const modules = [
   MatSelectModule,
   MatSliderModule,
   MatCheckboxModule,
-  MatButtonModule
+  MatButtonModule,
+  MatExpansionModule
+
 ];
 
 @NgModule({

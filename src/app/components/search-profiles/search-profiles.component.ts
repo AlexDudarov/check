@@ -1,34 +1,19 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CompactProfile} from '../../entity/compact-profile';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Country} from '../../entity/country';
 import {Category} from '../../entity/category';
 import {SearchFilter} from '../../filters/search-filter';
-import {FormControl} from '@angular/forms';
+
 import {CountryService} from '../../services/country.service';
 import {CategoryService} from '../../services/category.service';
 import {ProfilesService} from '../../services/profiles.service';
 
+import {ProfileDialogComponent} from '../profile-dialog/profile-dialog.component';
 
 
-const profiles: CompactProfile[] = [
-  new CompactProfile('AAA', 'VIP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('AAA', 'VIP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('AAA', 'VIP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('AAA', 'VIP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-  new CompactProfile('BBB', 'PEP'),
-];
+
+
 
 @Component({
   selector: 'app-search-profiles',
@@ -37,7 +22,7 @@ const profiles: CompactProfile[] = [
 })
 export class SearchProfilesComponent implements OnInit {
 
-  profiles: CompactProfile[];
+
   countries: Country[];
   categories: Category[];
   filter: SearchFilter;
@@ -46,11 +31,12 @@ export class SearchProfilesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource:  MatTableDataSource<CompactProfile>;
 
-  constructor(private countryService: CountryService, private categoryService: CategoryService, private profileService: ProfilesService) {
+  constructor(private countryService: CountryService, private categoryService: CategoryService, private profileService: ProfilesService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.profiles = this.getProfiles();
+
     this.displayedColumns = this.getDisplayedColumns();
     this.dataSource = new MatTableDataSource<CompactProfile>([]);
     this.dataSource.paginator = this.paginator;
@@ -61,18 +47,20 @@ export class SearchProfilesComponent implements OnInit {
 
   }
 
-  getProfiles(): CompactProfile[] {
-    console.log(profiles);
-    return profiles;
 
-  }
 
   getDisplayedColumns(): string[] {
     return ['name', 'categories'];
   }
 
-  onRowClicked(row) {
-    console.log('Row clicked: ', row);
+  onRowClicked(id: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '800px';
+    dialogConfig.data = {
+      id:  id,
+    };
+    this.dialog.open(ProfileDialogComponent, dialogConfig);
   }
 
   find() {

@@ -1,0 +1,134 @@
+<h2 mat-dialog-title *ngIf="profile">{{profile.fullName}}</h2>
+<mat-dialog-content *ngIf="profile">
+
+  <mat-card>
+    <mat-list dense>
+      <mat-list-item>
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let image of profile.imageUrls let i = index"
+                 [ngClass]="{'active' : i == 0}">
+              <img class="d-block w-100" [src]="image" alt="First slide">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </mat-list-item>
+      <mat-list-item> Ид {{profile.id}}</mat-list-item>
+      <mat-list-item *ngIf="profile.lastName">Фамилия(Наименование) {{profile.lastName}}</mat-list-item>
+      <mat-list-item *ngIf="profile.firstName"> Имя {{profile.firstName}}</mat-list-item>
+      <mat-list-item *ngIf="profile.middleName"> Отчество {{profile.middleName}}</mat-list-item>
+      <mat-list-item *ngIf="profile.title"> Титул/Звание {{profile.title}}</mat-list-item>
+      <mat-list-item *ngIf="profile.sex"> Пол {{profile.sex}}</mat-list-item>
+      <mat-list-item *ngIf="profile.ssn"> Номер социального страхования {{profile.ssn}}</mat-list-item>
+      <mat-list-item *ngIf="profile.activeStatus"> Статус {{profile.activeStatus}}</mat-list-item>
+      <mat-list-item *ngIf="profile.nationality"> Национальность {{profile.nationality}}</mat-list-item>
+      <mat-list-item *ngIf="profile.age"> Возраст {{profile.age}}</mat-list-item>
+      <mat-list-item *ngIf="profile.dateOfBirth"> Дата рождения {{profile.dateOfBirth}}</mat-list-item>
+      <mat-list-item *ngIf="profile.asOfDate"> Предполагаемая дата рождения {{profile.asOfDate}}</mat-list-item>
+      <mat-list-item *ngIf="profile.isDeceased !== undefined"> Является умершим {{profile.isDeceased ? 'Да': 'Нет'}}
+      </mat-list-item>
+      <mat-list-item *ngIf="profile.dateOfDeath"> Дата смерти {{profile.dateOfDeath}}</mat-list-item>
+      <mat-list-item *ngIf="profile.placeOfBirth">Место рождения {{profile.placeOfBirth}}</mat-list-item>
+      <mat-list-item *ngIf="profile.categories">Категории {{profile.categories}}</mat-list-item>
+      <mat-list-item *ngIf="profile.subCategory">Подкатегория {{profile.subCategory}}</mat-list-item>
+      <mat-list-item *ngIf="profile.entered">Дата внесения в базу {{profile.entered}}</mat-list-item>
+      <mat-list-item *ngIf="profile.updated">Дата обновления {{profile.updated}}</mat-list-item>
+      <mat-accordion *ngIf="profile.positions?.length">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Должности</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list dense>
+            <mat-list-item *ngFor="let position of profile.positions">{{position}}</mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      <mat-list-item *ngIf="profile.editor">Редактор {{profile.editor}}</mat-list-item>
+      <mat-list-item *ngIf="profile.furtherInformation">Дополнительная информация {{profile.furtherInformation}}
+      </mat-list-item>
+      <mat-accordion *ngIf="profile.aliases?.length">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Возможные псевдонимы</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let alias of profile.aliases">{{alias}}</mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      <mat-accordion *ngIf="profile.companyNames?.length">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Компании</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let companyName of profile.companyNames">{{companyName}}</mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      <mat-accordion *ngIf="profile.keywords?.length">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Ключевые слова</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let keyword of profile.keywords">{{keyword}}</mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion *ngIf="profile.externalSources?.length">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Внешние источники</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let externalSource of profile.externalSources">{{externalSource}}</mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      <mat-accordion *ngIf="profile.documents?.length">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Документы</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let document of profile.documents">{{document.number}}</mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      <mat-accordion *ngIf="profile.sanctions?.length">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Санкции</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let sanction of profile.sanctions">{{sanction.name}}</mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </mat-list>
+
+
+  </mat-card>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Закрыть</button>
+
+</mat-dialog-actions>

@@ -17,13 +17,23 @@ import {PrefixIfValueNotEmptyPipe} from './pipes/prefix-if-value-not-empty.pipe'
 import {AddDelimiterPipe} from './pipes/add-delimiter.pipe';
 import { ProfilesDialogComponent } from './components/profiles-dialog/profiles-dialog.component';
 import {MAT_DATE_LOCALE} from '@angular/material';
+import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
+import { FullSearchComponent } from './components/full-search/full-search.component';
+import { ProfileTableComponent } from './components/profile-table/profile-table.component';
 
 
 export const routeConfig: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
-    component: SearchProfilesComponent
+    component: SearchProfilesComponent,
+    children: [
+      {
+        path: 'fullText',
+        component: FullSearchComponent
+      },
+
+    ]
   },
   {
     path: 'statistic',
@@ -47,7 +57,10 @@ export const routeConfig: Routes = [
     NavigationComponent,
     PrefixIfValueNotEmptyPipe,
     AddDelimiterPipe,
-    ProfilesDialogComponent
+    ProfilesDialogComponent,
+    ProfileDialogComponent,
+    FullSearchComponent,
+    ProfileTableComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +78,7 @@ export const routeConfig: Routes = [
     {provide: MAT_DATE_LOCALE, useValue: 'ru-Ru'},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ProfilesDialogComponent]
+  entryComponents: [ProfilesDialogComponent, ProfileDialogComponent]
 
 })
 export class AppModule {
