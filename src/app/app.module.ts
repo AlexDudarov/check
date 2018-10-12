@@ -20,20 +20,14 @@ import {MAT_DATE_LOCALE} from '@angular/material';
 import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
 import { FullSearchComponent } from './components/full-search/full-search.component';
 import { ProfileTableComponent } from './components/profile-table/profile-table.component';
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 
 export const routeConfig: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/search', pathMatch: 'full' },
   {
-    path: 'home',
+    path: 'search',
     component: SearchProfilesComponent,
-    children: [
-      {
-        path: 'fullText',
-        component: FullSearchComponent
-      },
-
-    ]
   },
   {
     path: 'statistic',
@@ -60,7 +54,8 @@ export const routeConfig: Routes = [
     ProfilesDialogComponent,
     ProfileDialogComponent,
     FullSearchComponent,
-    ProfileTableComponent
+    ProfileTableComponent,
+    SearchFilterComponent
   ],
   imports: [
     BrowserModule,

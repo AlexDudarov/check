@@ -1,0 +1,36 @@
+<mat-card>
+  <router-outlet></router-outlet>
+  <mat-card-title>
+    Критерии поиска
+  </mat-card-title>
+  <mat-card-content>
+    <mat-form-field class="padding">
+      <input matInput [(ngModel)]="filter.name" placeholder="Наименование или id">
+    </mat-form-field>
+    <mat-form-field class="padding">
+      <mat-select placeholder="Страна" [(ngModel)]="filter.countries" multiple>
+        <mat-option *ngFor="let country of countries" [value]="country">{{country.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="padding">
+      <mat-select placeholder="Категория" [(ngModel)]="filter.categories" multiple>
+        <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="padding">
+      <input matInput [matDatepicker]="picker" placeholder="Дата рождения" [(ngModel)]="filter.birthDay" name="name">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button  [disabled]="isEmptyName()" (click)="find()">Найти</button>
+    <mat-slider
+      thumbLabel [(ngModel)]="filter.maxResults"
+      tickInterval="1"
+      min="100"
+      max="1000"
+    ></mat-slider>
+    <mat-checkbox [(ngModel)]="filter.fuzzy">Нечеткий поиск</mat-checkbox>
+  </mat-card-actions>
+</mat-card>
