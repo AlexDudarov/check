@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FullSearchComponent } from './full-search.component';
+import { SearchByTextFilterComponent } from './search-by-text-filter.component';
 
-describe('FullSearchComponent', () => {
-  let component: FullSearchComponent;
-  let fixture: ComponentFixture<FullSearchComponent>;
+describe('SearchByTextFilterComponent', () => {
+  let component: SearchByTextFilterComponent;
+  let fixture: ComponentFixture<SearchByTextFilterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FullSearchComponent ]
+      declarations: [ SearchByTextFilterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FullSearchComponent);
+    fixture = TestBed.createComponent(SearchByTextFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

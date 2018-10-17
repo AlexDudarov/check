@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {CompactProfile} from '../../entity/compact-profile';
+import {ProfileDialogComponent} from '../profile-dialog/profile-dialog.component';
+import {DataService} from '../../services/data-service';
 
 @Component({
   selector: 'app-profile-table',
@@ -9,27 +11,30 @@ import {CompactProfile} from '../../entity/compact-profile';
 })
 export class ProfileTableComponent implements OnInit {
 
-  @Input()
-  profiles: CompactProfile[];
+//  @Input()
+ // subject;
   displayedColumns: string[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<CompactProfile>;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private dataService: DataService) {
   }
-
-  ngOnInit() {
-    this.displayedColumns = this.getDisplayedColumns();
-    this.dataSource = new MatTableDataSource<CompactProfile>([]);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-
-  getDisplayedColumns(): string[] {
+  static getDisplayedColumns(): string[] {
     return ['name', 'categories'];
   }
+
+ngOnInit() {
+  this.displayedColumns = ProfileTableComponent.getDisplayedColumns();
+  this.dataSource = new MatTableDataSource<CompactProfile>([]);
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
+  this.dataService.getData().subscribe(data => {
+      this.dataSource.data = data;
+    }
+  );
+}
+
 
   onRowClicked(id: number) {
     const dialogConfig = new MatDialogConfig();
@@ -38,7 +43,8 @@ export class ProfileTableComponent implements OnInit {
     dialogConfig.data = {
       id: id,
     };
-    this.dialog.open(ProfileTableComponent, dialogConfig);
+   this.dialog.open(ProfileDialogComponent, dialogConfig);
+
   }
 
 }

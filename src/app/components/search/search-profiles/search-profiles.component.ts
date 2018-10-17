@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CompactProfile} from '../../entity/compact-profile';
-import {ProfilesService} from '../../services/profiles.service';
+import {ProfilesService} from '../../../services/profiles.service';
+import {Subject} from 'rxjs';
 
 
 @Component({
@@ -9,18 +9,18 @@ import {ProfilesService} from '../../services/profiles.service';
   styleUrls: ['./search-profiles.component.css']
 })
 export class SearchProfilesComponent implements OnInit {
-
-  profiles: CompactProfile[];
+  subject;
 
   constructor(private profileService: ProfilesService) {
+    this.subject = new Subject();
+
   }
+
   ngOnInit() {
   }
 
-  displayCounter(filter) {
-    this.profileService.getProfiles(filter).subscribe((profiles) => {
-      this.profiles = profiles;
-    });
+  find(filter) {
+    this.profileService.getProfiles(filter).subscribe(profiles => this.subject.next(profiles));
   }
 
 }

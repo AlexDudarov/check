@@ -15,9 +15,9 @@
 
 <button mat-button [matMenuTriggerFor]="menu">Menu</button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item><a class="nav-link"  [routerLink]="'home/search'">Поиск</a></button>
+  <button mat-menu-item><a class="nav-link"  [routerLink]="'search/by/param'">Поиск</a></button>
   <button mat-menu-item><a class="nav-link" routerLink="about">Проверка документа</a></button>
-  <button mat-menu-item><a class="nav-link" [routerLink]="'home/fullText'">Поиск по фрагменту</a></button>
+  <button mat-menu-item><a class="nav-link" [routerLink]="'search/by/text'">Поиск по фрагменту</a></button>
   <button mat-menu-item><a class="nav-link" routerLink="statistic">Статистика</a></button>
   <button mat-menu-item><a class="nav-link" routerLink="courses">Администрирование</a></button>
   <button mat-menu-item><a class="nav-link" routerLink="courses">Свои списки</a></button>

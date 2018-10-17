@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
-import {SearchProfilesComponent} from './components/search-profiles/search-profiles.component';
+import {SearchProfilesComponent} from './components/search/search-profiles/search-profiles.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import {StatisticComponent} from './components/statistic/statistic.component';
@@ -18,16 +18,21 @@ import {AddDelimiterPipe} from './pipes/add-delimiter.pipe';
 import { ProfilesDialogComponent } from './components/profiles-dialog/profiles-dialog.component';
 import {MAT_DATE_LOCALE} from '@angular/material';
 import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
-import { FullSearchComponent } from './components/full-search/full-search.component';
+import { SearchByTextFilterComponent } from './components/search/search-by-text-filter/search-by-text-filter.component';
 import { ProfileTableComponent } from './components/profile-table/profile-table.component';
-import { SearchFilterComponent } from './components/search-filter/search-filter.component';
+import { SearchFilterComponent } from './components/search/search-filter/search-filter.component';
+import {DataService} from './services/data-service';
 
 
 export const routeConfig: Routes = [
-  { path: '', redirectTo: '/search', pathMatch: 'full' },
+  { path: '', redirectTo: '/search/by/param', pathMatch: 'full' },
   {
-    path: 'search',
-    component: SearchProfilesComponent,
+    path: 'search/by/param',
+    component: SearchFilterComponent,
+  },
+  {
+    path: 'search/by/text',
+    component: SearchByTextFilterComponent,
   },
   {
     path: 'statistic',
@@ -53,9 +58,9 @@ export const routeConfig: Routes = [
     AddDelimiterPipe,
     ProfilesDialogComponent,
     ProfileDialogComponent,
-    FullSearchComponent,
+    SearchByTextFilterComponent,
     ProfileTableComponent,
-    SearchFilterComponent
+    SearchFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,12 +70,9 @@ export const routeConfig: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { dataEncapsulation: false }
-    // )
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'ru-Ru'},
+    {provide: MAT_DATE_LOCALE, useValue: 'ru-Ru'}, DataService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ProfilesDialogComponent, ProfileDialogComponent]

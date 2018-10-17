@@ -1,0 +1,11 @@
+.padding{
+  padding-right: 40px;
+}
+
+mat-slider {
+  width: 300px;
+}
+.mat-row:hover {
+  background-color: #8ec8c3;
+  cursor: pointer;
+}

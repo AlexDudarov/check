@@ -4,6 +4,8 @@ import {Observable} from 'rxjs/internal/Observable';
 import {CompactProfile} from '../entity/compact-profile';
 import {SearchFilter} from '../filters/search-filter';
 import {Profile} from '../entity/profile';
+import {SearchByTextFilter} from '../filters/search-by-text-filter';
+import {SearchByPassportFilter} from '../filters/search-by-passport-filter';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -20,6 +22,15 @@ export class ProfilesService {
   }
 
   getProfiles(filter: SearchFilter): Observable<CompactProfile[]> {
+    console.log(filter);
+    return this.http.post<CompactProfile[]>(this.profileUrl + '/search/by/param', filter, httpOptions);
+  }
+
+  getProfilesByText(filter: SearchByTextFilter): Observable<CompactProfile[]> {
+    console.log(filter);
+    return this.http.post<CompactProfile[]>(this.profileUrl + '/search/by/text', filter, httpOptions);
+  }
+  getProfilesByPassport(filter: SearchByPassportFilter): Observable<CompactProfile[]> {
     console.log(filter);
     return this.http.post<CompactProfile[]>(this.profileUrl, filter, httpOptions);
   }
